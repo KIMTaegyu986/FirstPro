@@ -1,4 +1,4 @@
-package WindowBuilder.Test2;
+package WindowBuilder2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

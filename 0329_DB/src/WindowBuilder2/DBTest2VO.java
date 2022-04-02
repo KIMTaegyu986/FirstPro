@@ -1,6 +1,6 @@
-package WindowBuilder.Test;
+package WindowBuilder2;
 
-public class DBTest3VO {
+public class DBTest2VO {
 	private int idx;
 	private String name;
 	private int age;
@@ -39,7 +39,7 @@ public class DBTest3VO {
 	}
 	@Override
 	public String toString() {
-		return "DBTest3VO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", joinday=" + joinday
+		return "DBTestVO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", joinday=" + joinday
 				+ "]";
 	}
 }

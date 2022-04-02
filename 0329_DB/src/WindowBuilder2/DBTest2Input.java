@@ -1,4 +1,4 @@
-package WindowBuilder.Test2;
+package WindowBuilder2;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
