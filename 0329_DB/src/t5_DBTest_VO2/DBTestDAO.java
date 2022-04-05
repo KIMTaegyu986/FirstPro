@@ -1,4 +1,4 @@
-package t5_DBTest_VO;
+package t5_DBTest_VO2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

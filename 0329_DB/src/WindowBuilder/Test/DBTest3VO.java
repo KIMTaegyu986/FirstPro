@@ -1,21 +1,11 @@
-package t5_DBTest_VO;
+package WindowBuilder.Test;
 
-public class DBTestVO {
+public class DBTest3VO {
 	private int idx;
 	private String name;
 	private int age;
 	private String gender;
 	private String joinday;
-	
-	public DBTestVO() {}
-	
-	public DBTestVO(int idx, String name, int age, String gender, String joinday) {
-		this.idx = idx;
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
-		this.joinday = joinday;
-	}
 	
 	public int getIdx() {
 		return idx;
@@ -49,7 +39,7 @@ public class DBTestVO {
 	}
 	@Override
 	public String toString() {
-		return "DBTestVO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", joinday=" + joinday
+		return "DBTest3VO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", joinday=" + joinday
 				+ "]";
 	}
 }

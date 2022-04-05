@@ -1,4 +1,4 @@
-package t5_DBTest_VO;
+package t5_DBTest_VO2;
 
 public class DBTestVO {
 	private int idx;

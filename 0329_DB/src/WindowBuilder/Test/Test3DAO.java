@@ -1,23 +1,24 @@
-package WindowBuilder2;
+package WindowBuilder.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 
-public class DBTest2DAO {
+public class Test3DAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
 	String sql = "";
 	
-	DBTest2VO vo = null;
+	DBTest3VO vo = null;
 	
 	// 처음 DAO생성시에 Database 연결한다.
-	public DBTest2DAO() {
+	public Test3DAO() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/javagreen";
@@ -76,84 +77,27 @@ public class DBTest2DAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 에러 : " + e.getMessage());
-		} finally {
-			rsClose();
 		}
 		return vData;
 	}
 
-	// 회원가입시키기
-	public void DBTestInput(DBTest2VO vo) {
+	// 성별만 담아오기
+	public ArrayList<String> getGender() {
+		ArrayList<String> vDataGender = new ArrayList<String>();
 		try {
-			sql = "insert into dbtest value (default,?,?,?,?)";
+			sql = "select distinct gender from dbtest";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getName());
-			pstmt.setInt(2, vo.getAge());
-			pstmt.setString(3, vo.getGender());
-			pstmt.setString(4, vo.getJoinday());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
-		} finally {
-			pstmtClose();
-		}
-	}
-
-	// 개별자료 검색처리
-	public DBTest2VO getSearch(int idx) {
-		DBTest2VO vo = new DBTest2VO();
-		try {
-			sql = "select * from dbtest where idx = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				vo.setIdx(idx);
-				vo.setName(rs.getString("name"));
-				vo.setAge(rs.getInt("age"));
-				vo.setGender(rs.getString("gender"));
-				vo.setJoinday(rs.getString("joinday"));
-			}
-		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
-		} finally {
-			rsClose();
-		}
-		return vo;
-	}
-
-	// 조건검색하기
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Vector getSearch(String comboStr, String txtStr) {
-		Vector vData = new Vector();
-		try {
-			sql = "select * from dbtest where "+comboStr+" like ? order by idx desc";
-			pstmt = conn.prepareStatement(sql);
-			if(!comboStr.equals("age")) {
-				pstmt.setString(1, "%"+txtStr+"%");
-			}
-			else {
-				pstmt.setInt(1, Integer.parseInt(txtStr));
-			}
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Vector vo = new Vector();
-				vo.add(rs.getInt("idx"));
-				vo.add(rs.getString("name"));
-				vo.add(rs.getInt("age"));
-				vo.add(rs.getString("gender"));
-				vo.add(rs.getString("joinday"));
-				
-				vData.add(vo);
+				vDataGender.add(rs.getString("gender"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL에러 : " + e.getMessage());
 		} finally {
 			rsClose();
 		}
-		return vData;
+		return vDataGender;
 	}
 	
 	

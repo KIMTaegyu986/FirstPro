@@ -1,4 +1,4 @@
-package WindowBuilder2;
+package WindowBuilder.Test2;
 
 import java.awt.Color;
 import java.awt.Font;

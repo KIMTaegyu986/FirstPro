@@ -1,4 +1,4 @@
-package WindowBuilder2;
+package WindowBuilder.Test2;
 
 import java.awt.Font;
 import java.net.URL;
@@ -68,10 +68,18 @@ public class DBTest2Main extends JFrame {
 		
 		/* 아래로 메소드 처리부 */
 
-		// 회원등록
+		// 회원등록(버튼을 클릭했을때 수행)
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new DBTest2Input();
+			}
+		});
+		
+		// 회원등록(버튼에서 엔터키를 눌렀을때 수행)
+		btnInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) new DBTest2Input();
 			}
 		});
 		

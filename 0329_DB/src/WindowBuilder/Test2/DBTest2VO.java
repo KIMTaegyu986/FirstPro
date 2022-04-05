@@ -1,4 +1,4 @@
-package WindowBuilder2;
+package WindowBuilder.Test2;
 
 public class DBTest2VO {
 	private int idx;
