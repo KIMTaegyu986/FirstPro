@@ -13,34 +13,37 @@ public class LoginDAO {
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-	
+
 	// stmt객체 Close
 	public void stmtClose() {
-		if(stmt != null) {
+		if (stmt != null) {
 			try {
 				stmt.close();
-			} catch (SQLException e) {}
+			} catch (SQLException e) {
+			}
 		}
 	}
-	
+
 	// rs객체 close
 	public void rsClose() {
-		if(rs != null) {
+		if (rs != null) {
 			try {
 				rs.close();
 				stmtClose();
-			} catch (SQLException e) {}
+			} catch (SQLException e) {
+			}
 		}
 	}
-	
-  // 데이터베이스객체 Close 
+
+	// 데이터베이스객체 Close
 	public void dbClose() {
 		try {
 			conn.close();
-			//System.out.println("DB를 닫았습니다.");
-		} catch (Exception e) {}
+			// System.out.println("DB를 닫았습니다.");
+		} catch (Exception e) {
+		}
 	}
-	
+
 	public LoginDAO() {
 		// db 연결정보 설정 및 드라이버 로딩
 		String url = "jdbc:mysql://localhost:3306/javagreen02";
@@ -103,12 +106,13 @@ public class LoginDAO {
 	}
 
 	// 2. 회원가입창: 회원가입메서드
-	public void createUser(String u_id, String u_pass, String u_name, String u_gender, String u_birth, String u_pno){
+	public void createUser(String u_id, String u_pass, String u_name, String u_gender, String u_birth, String u_pno) {
 		try {
 			Statement stmt = conn.createStatement();
-			String sql = "insert into user values('" + u_id + "', '" + u_pass +"', '" + u_name +"', '" + u_gender +"', '" + u_birth +"', '" + u_pno +"');";
+			String sql = "insert into user values('" + u_id + "', '" + u_pass + "', '" + u_name + "', '" + u_gender
+					+ "', '" + u_birth + "', '" + u_pno + "');";
 			stmt.executeUpdate(sql);
-			System.out.println("자료가 등록되었습니다.");
+			System.out.println("회원이 등록되었습니다.");
 		} catch (SQLException e) {
 			System.out.println("SQL오류" + e.getMessage());
 		} finally {

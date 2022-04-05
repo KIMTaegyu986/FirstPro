@@ -12,7 +12,6 @@ public class LoginVO {
 	public LoginVO() {
 	}
 
-	// Setter and Getter
 	public void setU_id(String u_id) {
 		this.u_id = u_id;
 	}

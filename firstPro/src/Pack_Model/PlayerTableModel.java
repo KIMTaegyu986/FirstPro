@@ -61,7 +61,6 @@ public class PlayerTableModel extends AbstractTableModel {
 				result = to.getP_backno();
 				break;
 		}
-
 		return result;
 	}
 }

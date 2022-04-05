@@ -99,7 +99,7 @@ delete from player where p_no = 21;
 select * from player order by p_no desc limit 5;
 select * from player limit 20;
 
-select p_no from player order by p_no desc limit 1;
+select p_no from player where t_code = 'K1' order by p_no desc limit 1;
 
 select * from player where p_name = '김기중';
 

@@ -11,7 +11,6 @@ public class PlayerVO {
 	private String p_pos;
 
 	public PlayerVO() {
-
 	}
 
 	public String getP_no() {
@@ -84,5 +83,5 @@ public class PlayerVO {
 				+ ", p_birth=" + p_birth + ", p_length=" + p_length + ", p_weight=" + p_weight + ", p_pos=" + p_pos
 				+ "]";
 	}
-	
+
 }

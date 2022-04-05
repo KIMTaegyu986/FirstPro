@@ -8,6 +8,7 @@ public class TeamVO {
 	private String t_year;
 
 	public TeamVO() {
+		
 	}
 
 	public String getT_code() {

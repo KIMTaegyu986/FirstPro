@@ -24,4 +24,5 @@ public class TeamComboModel extends DefaultComboBoxModel<Object> {
 		String resultTeam = teams.get(index).getT_code() + "(" + teams.get(index).getT_name() + ")";
 		return resultTeam;
 	}
+	
 }

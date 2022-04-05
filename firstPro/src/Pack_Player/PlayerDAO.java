@@ -34,26 +34,20 @@ public class PlayerDAO {
 		}
 	}
 
-	// 4. 선수추가창: 선수추가 메서드
-	public void insertPlayer(String t_code, String p_name, String p_length, String p_birth, String p_weight, String p_pos, String p_backno) throws SQLException {
+	// 선수 추가 창: 선수추가 메서드
+	public void insertPlayer(String t_code, String p_name, String p_length, String p_birth, String p_weight,
+			String p_pos, String p_backno) throws SQLException {
 		// 선수 추가하기
 		try {
 			Statement stmt = conn.createStatement();
-			String sqlNum = "select p_no from player order by p_no desc limit 1";
+			String sqlNum = "select p_no from player where t_code = '" + t_code + "' order by p_no desc limit 1";
 			PreparedStatement pstmt = this.conn.prepareStatement(sqlNum);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			int p_no = rs.getInt(1) + 1;
-			System.out.println("선수번호 :"+p_no);
-			System.out.println("팀코드 :"+t_code);
-			System.out.println("백번호 :"+p_backno);
-			System.out.println("이름 :"+p_name);
-			System.out.println("생일 :"+p_birth);
-			System.out.println("키 :"+p_length);
-			System.out.println("몸무케 :"+p_weight);
-			System.out.println("포지션 :"+p_pos);
-			
-			String sql = "insert into player values (default,'" + p_no + "','" + t_code + "','" + p_backno + "','" + p_name + "','" + p_birth + "','" + p_length + "','" + p_weight + "','" + p_pos + "')";
+
+			String sql = "insert into player values (default,'" + p_no + "','" + t_code + "','" + p_backno + "','"
+					+ p_name + "','" + p_birth + "','" + p_length + "','" + p_weight + "','" + p_pos + "')";
 			stmt.executeUpdate(sql);
 			System.out.println("선수 등록되었습니다.");
 		} catch (SQLException e) {
@@ -61,11 +55,14 @@ public class PlayerDAO {
 		}
 	}
 
-	// 6. 선수수정창: 선수수정 메서드
-	public void updatePlayer(int p_code,int p_no,String t_code, String p_name, String p_length, String p_birth, String p_weight, String p_pos, String p_backno) throws SQLException {
+	// 선수 수정 창: 선수 수정 메서드
+	public void updatePlayer(int p_code, int p_no, String t_code, String p_name, String p_length, String p_birth,
+			String p_weight, String p_pos, String p_backno) throws SQLException {
 		try {
 			Statement stmt = conn.createStatement();
-			String sql = "update player set p_backno='"+p_backno+"', p_name='" + p_name +"', p_birth='" + p_birth +"', p_length='" + p_length +"', p_weight='" + p_weight +"', p_pos='" + p_pos +"', p_no='" + p_no +"' where p_code = '" + p_code +"' ";
+			String sql = "update player set p_backno='" + p_backno + "', p_name='" + p_name + "', p_birth='" + p_birth
+					+ "', p_length='" + p_length + "', p_weight='" + p_weight + "', p_pos='" + p_pos + "', p_no='"
+					+ p_no + "' where p_code = '" + p_code + "' ";
 			stmt.executeUpdate(sql);
 			System.out.println("수정완료!");
 		} catch (SQLException e) {
@@ -73,14 +70,13 @@ public class PlayerDAO {
 		}
 	}
 
-	// 선수이름 검색하는 메서드
-	public ArrayList<PlayerVO> searchPlayer(String playerName) {
+	// 선수 검색하는 메서드
+	public ArrayList<PlayerVO> searchPlayer(String t_code) {
 
 		try {
-//			String sql = "select * from player where t_code = ?";
-			String sql =  "select * from player p,team t where p.t_code = t.t_code and t.t_code =?";
+			String sql = "select * from player p,team t where p.t_code = t.t_code and t.t_code =?";
 			PreparedStatement pstmt = this.conn.prepareStatement(sql);
-			pstmt.setString(1, playerName);
+			pstmt.setString(1, t_code);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				PlayerVO pv = new PlayerVO();
@@ -93,7 +89,6 @@ public class PlayerDAO {
 				pv.setP_pos(rs.getString("p.p_pos"));
 				pv.setP_backno(rs.getString("p.p_backno"));
 				players.add(pv);
-
 			}
 			if (rs != null)
 				rs.close();
@@ -101,23 +96,19 @@ public class PlayerDAO {
 				pstmt.close();
 			if (conn != null)
 				conn.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
-
 		return players;
 	}
 
 	// 선수 삭제하는 메서드
-	public void deletePlayer(int playerNum) {
-		System.out.println(playerNum);
-
+	public void deletePlayer(int p_no) {
 		try {
 			Statement stmt = conn.createStatement();
-			String sql = "delete from player where p_no ='" + playerNum + "'";
+			String sql = "delete from player where p_no ='" + p_no + "'";
 			stmt.executeUpdate(sql);
 			System.out.println("삭제완료!");
 		} catch (SQLException e) {
@@ -126,13 +117,12 @@ public class PlayerDAO {
 
 	}
 
-	// 6번패널: 선수 검색하는 메서드
-	public ArrayList<PlayerVO> searchPlayer_6(Integer pNumber) {
-
+	// 선수 검색하는 메서드
+	public ArrayList<PlayerVO> searchPlayer_6(Integer p_code) {
 		try {
 			String sql = "select * from player where p_code = ?";
 			PreparedStatement pstmt = this.conn.prepareStatement(sql);
-			pstmt.setInt(1, pNumber);
+			pstmt.setInt(1, p_code);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				PlayerVO pv = new PlayerVO();
@@ -145,7 +135,6 @@ public class PlayerDAO {
 				pv.setP_weight(rs.getString("p_weight"));
 				pv.setP_pos(rs.getString("p_pos"));
 				players_6.add(pv);
-
 			}
 			if (rs != null)
 				rs.close();
@@ -160,7 +149,6 @@ public class PlayerDAO {
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
-
 		return players_6;
 	}
 }
